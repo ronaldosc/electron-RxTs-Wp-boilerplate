@@ -6,9 +6,6 @@ on:
       os:
         required: true
         type: string
-      test-only:
-        required: false
-        type: string
 
 jobs:
   setup-matrix:
