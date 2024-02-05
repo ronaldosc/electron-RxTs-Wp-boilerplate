@@ -8,7 +8,7 @@ on:
         type: string
       test-only:
         required: false
-        type: boolean
+        type: string
 
 jobs:
   setup-matrix:
@@ -20,9 +20,9 @@ jobs:
         id: generate-matrix
         run: |
           if [ "${{ inputs.test-only }}" = "true" ]; then
-            VERSIONS='["14.x", "16.x"]'
+            VERSIONS='["16.x", "18.x"]'
           else
-            VERSIONS='["16.x"]'
+            VERSIONS='["14.x"]'
           fi
           echo ::set-output name=node_versions::"$VERSIONS"
         shell: bash
@@ -59,25 +59,23 @@ jobs:
         name: Run webpack
         run: npm run prod
 
-      - if: ${{ inputs.os == 'ubuntu-latest' }}
-        name: Build app package on ${{ inputs.os }}
+      - if: ${{ inputs.os == 'ubuntu-22.04' }}
+        name: Build app package on Linux by ${{ inputs.os }}
         run: |
           echo "Build on Linux is not yet supported."
           exit 1
 
       - if: ${{ inputs.os == 'macos-latest' }}
-        name: Build Windows & mac app packages on ${{ inputs.os }}
+        name: Build app package on Windows or Mac by ${{ inputs.os }}
         run: |
           if [ "${{ inputs.test-only }}" = "true" ]; then
             npm run build:mac -- --publish never
-            npm run build:win -- --publish never
           else
             npm run build:mac
-            npm run build:win
           fi
 
       - if: ${{ inputs.os == 'windows-latest' }}
-        name: Build Windows app package on ${{ inputs.os }}
+        name: Build app package on Windows by ${{ inputs.os }}
         run: |
           if [ "${{ inputs.test-only }}" = "true" ]; then
             npm run build:win -- --publish never
