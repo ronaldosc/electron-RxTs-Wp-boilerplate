@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x, 18.x]
     name: Node v${{ matrix.node-version }} on ${{ inputs.os }}
     runs-on: ${{ inputs.os }}
 
@@ -24,6 +24,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
       - name: Install
-        run: npm ci --omit optional
+        run: npm ci --omit=optional
       - name: Run tests
         run: npm run jest-ci
