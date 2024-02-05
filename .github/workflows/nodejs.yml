@@ -19,7 +19,7 @@ jobs:
   prepare-npm-cache-ubuntu:
     uses: ./.github/workflows/prepare-cache.yml
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
   prepare-npm-cache-macos:
     uses: ./.github/workflows/prepare-cache.yml
     with:
@@ -31,7 +31,7 @@ jobs:
 
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: prepare-npm-cache-ubuntu
 
     steps:
@@ -40,16 +40,17 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
-      - name: install
+      - name: Install
         run: npm ci
-      - name: run eslint
+      - name: Run ESLint
         run: npm run lint
 
+  # TEST
   test-ubuntu:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-ubuntu
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
   test-macos:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-macos
@@ -61,11 +62,12 @@ jobs:
     with:
       os: windows-latest
 
+  # BUNDLE
   bundle-linux:
     uses: ./.github/workflows/webpack.yml
     needs: test-ubuntu
     with:
-      os: ubuntu-latest
+      os: ubuntu-22.04
   bundle-mac:
     uses: ./.github/workflows/webpack.yml
     needs: test-macos
@@ -77,6 +79,7 @@ jobs:
     with:
       os: windows-latest
 
+  # BUILD
   build-mac:
     uses: ./.github/workflows/build.yml
     needs: bundle-mac
