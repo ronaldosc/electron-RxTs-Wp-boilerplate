@@ -11,6 +11,14 @@ on:
   pull_request:
     branches:
       - '**'
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      test-only:
+        required: false
+        type: boolean
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -47,7 +55,7 @@ jobs:
         run: npm run lint
 
   # TEST
-  test-ubuntu:
+  test-linux:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-ubuntu
     with:
@@ -66,7 +74,7 @@ jobs:
   # BUNDLE
   bundle-linux:
     uses: ./.github/workflows/webpack.yml
-    needs: test-ubuntu
+    needs: test-linux
     with:
       os: ubuntu-22.04
   bundle-mac:
@@ -81,6 +89,12 @@ jobs:
       os: windows-latest
 
   # BUILD
+  build-linux:
+    uses: ./.github/workflows/build.yml
+    needs: bundle-linux
+    with:
+      os: ubuntu-22.04
+      test-only: true
   build-mac:
     uses: ./.github/workflows/build.yml
     needs: bundle-mac
