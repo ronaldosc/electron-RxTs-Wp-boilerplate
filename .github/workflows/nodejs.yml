@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - actions-ubuntu
       - master
       - develop
       - 'release/**'
