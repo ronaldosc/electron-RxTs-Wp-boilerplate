@@ -59,27 +59,22 @@ jobs:
         name: Run webpack
         run: npm run prod
 
-      - if: ${{ inputs.os == 'ubuntu-22.04' }}
-        name: Build app package on Linux by ${{ inputs.os }}
+      - name: Build app package
         run: |
-          echo "Build on Linux is not yet supported."
-          exit 1
-
-      - if: ${{ inputs.os == 'macos-latest' }}
-        name: Build app package on Windows or Mac by ${{ inputs.os }}
-        run: |
-          if [ "${{ inputs.test-only }}" = "true" ]; then
-            npm run build:mac -- --publish never
-          else
-            npm run build:mac
-          fi
-
-      - if: ${{ inputs.os == 'windows-latest' }}
-        name: Build app package on Windows by ${{ inputs.os }}
-        run: |
-          if [ "${{ inputs.test-only }}" = "true" ]; then
-            npm run build:win -- --publish never
-          else
-            npm run build:win
+          if [ "${{ inputs.os }}" = "ubuntu-latest" ]; then
+            echo "Build on Linux is not yet supported."
+            exit 1
+          elif [ "${{ inputs.os }}" = "macos-latest" ]; then
+            if [ "${{ inputs.test-only }}" = "true" ]; then
+              npm run build:mac -- --publish never
+            else
+              npm run build:mac
+            fi
+          elif [ "${{ inputs.os }}" = "windows-latest" ]; then
+            if [ "${{ inputs.test-only }}" = "true" ]; then
+              npm run build:win -- --publish never
+            else
+              npm run build:win
+            fi
           fi
         shell: bash
