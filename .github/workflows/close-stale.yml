@@ -10,8 +10,8 @@ permissions:
 
 jobs:
   stale:
-    name: Close month old issues and PRs
-    runs-on: ubuntu-latest
+    name: Close month old issues and PR's
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/stale@v9
         with:
