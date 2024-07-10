@@ -7,7 +7,7 @@ on:
 jobs:
   questions:
     name: Questions
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Close issue
         uses: peter-evans/close-issue@v3
@@ -16,7 +16,7 @@ jobs:
           comment: Please note this issue tracker is not a help forum. We recommend using [Discussions](https://github.com/Devtography/electron-react-typescript-webpack-boilerplate/discussions) for questions.
   bug-without-repro:
     name: Bug reports without reproductions
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Close issue
         uses: peter-evans/close-issue@v3
