@@ -7,7 +7,7 @@ on:
       - actions-ubuntu
       - master
       - develop
-      - 'release/**'
+      - release/**
   pull_request:
     branches:
       - '**'
@@ -28,7 +28,7 @@ jobs:
   prepare-npm-cache-ubuntu:
     uses: ./.github/workflows/prepare-cache.yml
     with:
-      os: ubuntu-22.04
+      os: ubuntu-24.04
   prepare-npm-cache-macos:
     uses: ./.github/workflows/prepare-cache.yml
     with:
@@ -40,7 +40,7 @@ jobs:
 
   lint:
     name: Lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: prepare-npm-cache-ubuntu
 
     steps:
@@ -59,7 +59,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-ubuntu
     with:
-      os: ubuntu-22.04
+      os: ubuntu-24.04
   test-macos:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-macos
@@ -76,7 +76,7 @@ jobs:
     uses: ./.github/workflows/webpack.yml
     needs: test-linux
     with:
-      os: ubuntu-22.04
+      os: ubuntu-24.04
   bundle-mac:
     uses: ./.github/workflows/webpack.yml
     needs: test-macos
@@ -93,8 +93,8 @@ jobs:
     uses: ./.github/workflows/build.yml
     needs: bundle-linux
     with:
-      os: ubuntu-22.04
-      test-only: true
+      os: ubuntu-24.04
+      # test-only: true   (it says "test-only" is not defined in workflow)
   build-mac:
     uses: ./.github/workflows/build.yml
     needs: bundle-mac
