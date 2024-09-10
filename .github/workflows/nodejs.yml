@@ -32,11 +32,11 @@ jobs:
   prepare-npm-cache-macos:
     uses: ./.github/workflows/prepare-cache.yml
     with:
-      os: macos-latest
+      os: macos-12
   prepare-npm-cache-windows:
     uses: ./.github/workflows/prepare-cache.yml
     with:
-      os: windows-latest
+      os: windows-2022
 
   lint:
     name: Lint
@@ -64,12 +64,12 @@ jobs:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-macos
     with:
-      os: macos-latest
+      os: macos-12
   test-windows:
     uses: ./.github/workflows/test.yml
     needs: prepare-npm-cache-windows
     with:
-      os: windows-latest
+      os: windows-2022
 
   # BUNDLE
   bundle-linux:
@@ -81,12 +81,12 @@ jobs:
     uses: ./.github/workflows/webpack.yml
     needs: test-macos
     with:
-      os: macos-latest
+      os: macos-12
   bundle-windows:
     uses: ./.github/workflows/webpack.yml
     needs: test-windows
     with:
-      os: windows-latest
+      os: windows-2022
 
   # BUILD
   build-linux:
@@ -94,16 +94,16 @@ jobs:
     needs: bundle-linux
     with:
       os: ubuntu-24.04
-      # test-only: true   (it says "test-only" is not defined in workflow)
+      # test-only: true   (it points "test-only" as not defined in workflow)
   build-mac:
     uses: ./.github/workflows/build.yml
     needs: bundle-mac
     with:
-      os: macos-latest
+      os: macos-12
       # test-only: true
   build-windows:
     uses: ./.github/workflows/build.yml
     needs: bundle-windows
     with:
-      os: windows-latest
+      os: windows-2022
       # test-only: true
