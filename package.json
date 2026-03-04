@@ -75,7 +75,7 @@
     "typescript": "^4.8.4"
   },
   "optionalDependencies": {
-    "copy-webpack-plugin": "^11.0.0",
+    "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^6.7.1",
     "electron-builder": "^26.6.0",
     "file-loader": "^6.2.0",
