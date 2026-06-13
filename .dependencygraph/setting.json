@@ -1,0 +1,22 @@
+{
+  "entryFilePath": "dist/main.bundle.js",
+  "alias": {
+    "_/*": "src/*",
+    "_public/*": "public/*",
+    "_main/*": "src/main/*",
+    "_preload/*": "src/preload/*",
+    "_renderer/*": "src/renderer/*",
+    "_types/*": "src/types/*",
+    "_utils/*": "src/utils/*",
+    "_tests/*": "tests/*"
+  },
+  "resolveExtensions": [
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".vue",
+    ".scss",
+    ".less"
+  ]
+}
